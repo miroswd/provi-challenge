@@ -20,6 +20,23 @@ postgres
 
 ### Inicialização
 
+- Necessário configurar as variáveis ambiente.
+- O arquivo <a href="https://github.com/miroswd/provi-challenge/blob/master/example.env">example.env</a> deve ser renomeado para '.env'
+- Você pode passar as credenciais após o sinal de igual.
+
+```
+# Server - Porta em que a aplicação irá rodar
+PORT=
+
+# DATABASE
+DATABASE_USER=
+DATABASE_PASSWORD=
+DATABASE_DB=
+DATABASE_PORT=
+DATABASE_HOST=
+```
+
+### Rodando a aplicação
 ```
 npm run start
 npx sequelize db:migrate
