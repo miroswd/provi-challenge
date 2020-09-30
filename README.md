@@ -22,6 +22,7 @@ postgres
 
 ```
 npm run start
+npx sequelize db:migrate
 ```
 
 <!-- Todos os dados do usuário, são únicos -->
