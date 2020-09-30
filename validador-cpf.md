@@ -8,14 +8,14 @@ Verificação utiliza os 9 primeiros números
    e ir somando o resultado 
 
 ```js
-const cpfExample = "529.982.247-25"
-const resultado = 5 * 10 + 2 * 9 + 9 * 8...
+let cpfExample = "529.982.247-25"
+let resultado = 5 * 10 + 2 * 9 + 9 * 8...
 ```
 
 - [x]  Multiplica o resultado por 10, divide por 11 e captura o resto
 
 ```js
-final = resultado * 10 % 11 
+let final = resultado * 10 % 11 
 ```
 
 - [x] Se o final for igual ao primeiro dígito depois do verificador, o número após "-",
