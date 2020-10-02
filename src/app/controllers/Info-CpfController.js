@@ -2,7 +2,11 @@
 const { v4 } = require('uuid');
 const Infos = require('../models/Infos');
 const User = require('../models/User');
+const EndPoints = require('../models/EndPoints');
+
+// Utils
 const cpfValidator = require('../../utils/cpfValidator');
+const orderEndPoints = require('../../utils/orderEndPoints');
 
 class InfosController {
   async store(request,response){
@@ -16,7 +20,8 @@ class InfosController {
       
       const findUser = await Infos.findOne({where:{user_id:token}});
 
-      if (!cpfValidator(data)) return response.status(400).json({'error':"CPF invalid"})
+      // Validando cpf
+      cpfValidator(data)
 
       if (!findUser) await Infos.create({id, user_id:token}) 
 
@@ -24,11 +29,19 @@ class InfosController {
       
       await findUser.save()
       
-      const infos  = await Infos.findOne({where:{user_id:token}})
+      await Infos.findOne({where:{user_id:token}})
 
-      return response.status(200).json(infos)
+      
+      const findEndPointUser = await EndPoints.findOne({where:{user_id:token}});
+
+      if (!findEndPointUser){
+        await EndPoints.create({id, user_id:token, cpf:true})
+        
+      } 
+      const next_end_point = await orderEndPoints(token,'cpf')
+      return response.status(200).json({success:true, next_end_point})
     } catch (error) {
-      return response.status(400).json({"error":error})
+      return response.status(400).json({"Error":error.message})
     }
   }
 }

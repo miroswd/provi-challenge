@@ -2,6 +2,9 @@
 const { v4 } = require('uuid');
 const Infos = require('../models/Infos');
 const User = require('../models/User');
+const EndPoints = require('../models/EndPoints');
+
+const orderEndPoints = require('../../utils/orderEndPoints')
 
 class InfosController {
   async store(request,response){
@@ -24,13 +27,20 @@ class InfosController {
       findUser['first_name'] = firstName;
       findUser['last_name'] = lastName
       
+
+      const findEndPointUser = await EndPoints.findOne({where:{user_id:token}});
+
+      if (!findEndPointUser) throw new Error('CPF must be filled in before the other data')
+
+      const next_end_point = await orderEndPoints(token,'full_name')
+      
       await findUser.save()
       
-      const infos  = await Infos.findOne({where:{user_id:token}})
+      // await Infos.findOne({where:{user_id:token}})
 
-      return response.status(200).json(infos)
+      return response.status(200).json({success:true, next_end_point})
     } catch (error) {
-      return response.status(400).json(error)
+      return response.status(400).json({'Error':error.message})
     }
   }
 }

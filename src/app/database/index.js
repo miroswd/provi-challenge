@@ -5,8 +5,9 @@ const User = require('../models/User');
 const Infos = require('../models/Infos');
 const Address = require('../models/Address');
 const AmountRequest = require('../models/AmountRequest');
+const EndPoints = require('../models/EndPoints');
 
-const models = [User, Address, Infos, AmountRequest]
+const models = [User, Address, Infos, AmountRequest, EndPoints]
 
 class Database {
   constructor(){

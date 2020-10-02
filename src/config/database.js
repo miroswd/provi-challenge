@@ -1,9 +1,9 @@
 module.exports = {
-  username: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_DATABASE,
-  host: process.env.DB_HOST,
-  port:process.env.DB_PORT,
+  username: 'provi',
+  password: 'provi',
+  database: 'provi',
+  host: 'localhost',
+  port:5438,
   dialect: 'postgres',
   define:{
     'timestamps':true,
