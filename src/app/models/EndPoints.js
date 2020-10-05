@@ -11,7 +11,6 @@ class EndPoints extends Sequelize.Model{
       phone_number: Sequelize.BOOLEAN,
       address: Sequelize.BOOLEAN,
       amount_requests: Sequelize.BOOLEAN,
-      // document: Sequelize.BOOLEAN,
     }, {
       sequelize
     })
