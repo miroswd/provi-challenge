@@ -1,4 +1,6 @@
 const EndPoints = require("../app/models/EndPoints");
+const Infos = require('../app/models/Infos');
+
 
 const orderEndPoints = async (token, info) => {
   
@@ -10,11 +12,16 @@ const orderEndPoints = async (token, info) => {
     where:{user_id:token},
     attributes:{exclude:['id','user_id','createdAt','updatedAt']}}) ;
  
-    const collumns = endPoints._options.attributes;
-
-  for (let i =0; i < collumns.length; i++){
+  const collumns = endPoints._options.attributes;
     
+  const infosUser = await Infos.findOne({where:{user_id:token}});
+
+  let numberEndPoints = infosUser.end_points;
+
+  for (let i =0; i < numberEndPoints; i++){
     if(info === 'cpf') {
+      infosUser.end_points = collumns.length;
+      await infosUser.save()
       return collumns[i+1]
     } 
     
@@ -25,6 +32,9 @@ const orderEndPoints = async (token, info) => {
     if (collumns[i] === info){
       findEndPointUser[info] = true
       findEndPointUser.save()
+      if (i+1 === numberEndPoints){
+        return
+      }
       return collumns[i+1]
     }  
   }

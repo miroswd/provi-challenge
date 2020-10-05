@@ -10,6 +10,7 @@ class InfosController {
   async store(request,response){
     try {
       let {token, data} = request.body;
+
       
       let id = v4();
       const user = await User.findByPk(token)
@@ -20,7 +21,7 @@ class InfosController {
 
       if (!findUser) await Infos.create({id, user_id:token}) 
 
-      const fullName = data.split(' ');
+      const fullName = data.trim().split(' ');
       const firstName = fullName[0];
       const lastName = fullName.slice(1).join().replace(/,/g,' ')
       

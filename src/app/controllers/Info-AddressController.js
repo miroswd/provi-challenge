@@ -22,19 +22,19 @@ class InfosController {
 
       const user = await User.findByPk(token)
       if (!user) return response.status(404).json({msg:'The user does not exists'});
-      
+
       let id = v4();
-      
+
       const findUser = await Infos.findOne({where:{user_id:token}});
 
-      if (!findUser) await Infos.create({id, user_id:token}) 
+      if (!findUser) await Infos.create({id, user_id:token})
 
       const findEndPointUser = await EndPoints.findOne({where:{user_id:token}});
-      
+
       if (!findEndPointUser) throw new Error('CPF must be filled in before the other data')
 
       const next_end_point = await orderEndPoints(token,'address')
-      
+
       const findAddress = await Address.findOne({where:{user_id:token}});
 
       async function cepValidator(){
@@ -57,25 +57,25 @@ class InfosController {
       }
 
       await cepValidator();
-      
+
 
       if (!findAddress) {
         data = {id, user_id:token, cep, street, number, complement, city, state}
         await Address.create(data)
-      } else {  
-        id = findAddress['id']
-        findAddress['cep'] = cep;
-        findAddress['street'] = street;
-        findAddress['number'] = number;
-        findAddress['complement'] = complement;
-        findAddress['city'] = city;
-        findAddress['state'] = state;
+      } else {
+        id = findAddress.id
+        findAddress.cep = cep;
+        findAddress.street = street;
+        findAddress.number = number;
+        findAddress.complement = complement;
+        findAddress.city = city;
+        findAddress.state = state;
 
         await findAddress.save();
       }
 
-      findUser['address'] = id;
-      
+      findUser.address = id;
+
       await findUser.save()
 
       return response.status(200).json({success:true, next_end_point})

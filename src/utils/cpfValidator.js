@@ -1,7 +1,8 @@
 function cpfValidator(cpf){
   cpf = cpf.replace(/\.|-/g,'')
 
-  if (cpf.length > 11) throw new Error('Invalid CPF')
+  if (cpf.length != 11) throw new Error('Invalid CPF')
+  if (isNaN(Number(cpf))) throw new Error('Include only numbers in CPF')
   
   let sum = 0;
   for (let i = 0; i < 9; i++){
