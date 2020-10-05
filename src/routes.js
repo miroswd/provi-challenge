@@ -20,6 +20,6 @@ routes.post('/user/infos/address', AddressController.store)
 routes.post('/user/infos/:information', GenericInfosController.store)
 
 // Amount Request
-routes.post('/amount-request', AmountRequestController.store)
+routes.post('/amount-requests', AmountRequestController.store)
 
 module.exports = routes;

@@ -10,6 +10,8 @@ class Infos extends Sequelize.Model{
       birthday:Sequelize.STRING,
       phone_number:Sequelize.BIGINT,
       address:Sequelize.STRING,
+      // document:Sequelize.STRING,
+      end_points:Sequelize.INTEGER,
     },{
       sequelize
     })
