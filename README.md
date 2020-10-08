@@ -46,8 +46,16 @@ DATABASE_HOST=
 ```
 
 ### Rodando a aplicação
+
+```
+npm i
+```
+
 ```
 npm run start
+```
+
+```
 npx sequelize db:migrate
 ```
 
