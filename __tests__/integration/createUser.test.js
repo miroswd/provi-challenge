@@ -1,16 +1,13 @@
-// const User = require("../../src/app/models/User")
-// const UserController = require("../../src/app/controllers/UserController")
+const request = require('supertest');
+const app = require('../../src')
 
+describe('User', () => {
+  it('should be able to register',  async () => {
+    const response = await request(app).post('/user').send({
+      email:'user@user.com',
+      password:'123456'
+    })
 
-// describe('Create a user', () => {
-//   it('Cria o user', async () => {
-//     const user = await UserController.store({
-//       email:'aaa@aaa.com',
-//       password:'5465446'
-//     })
-
-//     done()
-
-//     expect(user.response).toBe(200)
-//   })
-// })
+    expect(response.body).toHaveProperty('token')
+   });
+});

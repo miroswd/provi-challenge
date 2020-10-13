@@ -1,4 +1,4 @@
-const {Router} = require('express');
+const { Router } = require('express');
 
 // Controllers
 const UserController = require('./app/controllers/UserController');
@@ -11,15 +11,21 @@ const AmountRequestController = require('./app/controllers/AmountRequestControll
 const routes = Router();
 
 // User
-routes.post('/user', UserController.store)
+routes.post('/user', UserController.store);
 
-// Infos 
-routes.post('/user/infos/full_name', FullNameController.store)
-routes.post('/user/infos/cpf', CpfController.store)
-routes.post('/user/infos/address', AddressController.store)
-routes.post('/user/infos/:information', GenericInfosController.store)
+// Infos
+routes.post('/user/infos/full_name', FullNameController.store);
+routes.post('/user/infos/cpf', CpfController.store);
+routes.post('/user/infos/address', AddressController.store);
+routes.post('/user/infos/:information', GenericInfosController.store);
+
+// Infos
+// routes.put('/user/infos/full_name', FullNameController.update);
+// routes.put('/user/infos/cpf', CpfController.update);
+// routes.put('/user/infos/address', AddressController.update);
+routes.put('/user/infos/:information', GenericInfosController.update);
 
 // Amount Request
-routes.post('/amount-requests', AmountRequestController.store)
+routes.post('/amount-requests', AmountRequestController.store);
 
 module.exports = routes;
